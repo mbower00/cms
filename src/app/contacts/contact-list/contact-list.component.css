@@ -1,0 +1,8 @@
+.contacts-heading {
+  display: flex;
+  align-items: center;
+}
+.new-contact {
+  margin-left: auto;
+  height: fit-content;
+}

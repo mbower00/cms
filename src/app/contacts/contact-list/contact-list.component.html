@@ -1,1 +1,29 @@
-<p>contact-list works!</p>
+<!-- using code from: 
+    - https://www.w3schools.com/bootstrap/bootstrap_panels.asp 
+    - Angular tutorial
+-->
+<div class="panel panel-default">
+  <div class="panel-heading contacts-heading">
+    <h2 class="">Contacts</h2>
+    <button class="btn btn-success new-contact">New Contact</button>
+  </div>
+  <div class="panel-body">
+    <a
+      href="#"
+      class="list-group-item clearfix"
+      *ngFor="let contact of contacts"
+    >
+      <div class="pull-left">
+        <h3 class="list-groupitem">{{ contact.name }}</h3>
+      </div>
+      <span class="pull-right">
+        <img
+          src="{{ contact.imageUrl }}"
+          alt="{{ contact.name }}"
+          class="img-responsive"
+          style="max-height: 60px"
+        />
+      </span>
+    </a>
+  </div>
+</div>
