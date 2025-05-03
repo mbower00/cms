@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.default-flex {
+  display: flex;
+  align-items: center;
+}
+.margin-auto-left {
+  margin-left: auto;
+  height: fit-content;
+}
+.gap-small {
+  gap: 5px;
+}
