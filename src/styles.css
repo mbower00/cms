@@ -10,12 +10,13 @@
 .gap-small {
   gap: 5px;
 }
+/* below two sections copied from message-list.component.css */
 .title {
   font-size: 2.5rem;
   font-weight: bold;
   padding-left: 15px;
 }
 .pad-left-right {
-  padding-left: 1 rem;
+  padding-left: 1rem;
   padding-right: 1rem;
 }
