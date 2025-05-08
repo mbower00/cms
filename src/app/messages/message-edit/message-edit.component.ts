@@ -28,4 +28,7 @@ export class MessageEditComponent {
     this.subjectElementRef.nativeElement.value = '';
     this.msgTextElementRef.nativeElement.value = '';
   }
+  onSubmit(event: SubmitEvent) {
+    event.preventDefault();
+  }
 }
