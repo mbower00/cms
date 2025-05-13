@@ -8,6 +8,7 @@ import { Document } from '../document.model';
 })
 export class DocumentListComponent {
   @Output() selectedDocumentEvent = new EventEmitter<Document>();
+  // some of the dummy data below is from the Chruch's website
   documents: Document[] = [
     new Document(
       '1',
