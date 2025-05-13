@@ -11,13 +11,16 @@
         <li><a (click)="onSelected('contacts')">Contacts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li class="dropdown" cmsDropdown>
           <a href="#" class="dropdown-toggle" role="button"
             >User <span class="caret"></span
           ></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Option 1</a></li>
-            <li><a href="#">Option 2</a></li>
+            <li><a>Login</a></li>
+            <li><a>Other</a></li>
+            <!-- below li tag is copied from https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_dropdown-menu-right&stacked=h -->
+            <li class="divider"></li>
+            <li><a>Logout</a></li>
           </ul>
         </li>
       </ul>
