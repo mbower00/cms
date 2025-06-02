@@ -12,8 +12,12 @@
         alt="{{ contact.name }}"
       />
       <div class="margin-auto-left default-flex gap-small">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <a
+          [routerLink]="['/contacts', contact.id, 'edit']"
+          class="btn btn-primary"
+          >Edit</a
+        >
+        <a (click)="onDelete()" class="btn btn-danger">Delete</a>
       </div>
     </div>
   </div>
