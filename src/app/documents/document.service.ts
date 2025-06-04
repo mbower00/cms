@@ -2,7 +2,6 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
