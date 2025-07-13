@@ -9,7 +9,11 @@
       New Contact
     </button>
   </div>
-  <div class="panel-body">
-    <cms-contact-item *ngFor="let contact of contacts" [contact]="contact" />
+  <div class="panel-body" cdkDropList [cdkDropListData]="contacts">
+    <cms-contact-item
+      *ngFor="let contact of contacts"
+      [contact]="contact"
+      cdkDrag
+    />
   </div>
 </div>
