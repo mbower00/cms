@@ -10,6 +10,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrl: './contact-list.component.css',
 })
 export class ContactListComponent implements OnInit, OnDestroy {
+  term: string;
   subscription: Subscription;
   contacts: Contact[] = [];
 
@@ -23,6 +24,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
         this.contacts = contacts;
       }
     );
+  }
+
+  search(value: string) {
+    this.term = value;
   }
 
   ngOnDestroy() {
