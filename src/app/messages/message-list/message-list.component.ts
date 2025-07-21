@@ -24,6 +24,7 @@ export class MessageListComponent implements OnInit {
     });
 
     this.messageService.messageChangedEvent.subscribe((messages: Message[]) => {
+      console.log(messages);
       this.messages = messages;
     });
   }

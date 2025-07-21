@@ -1,4 +1,5 @@
 // Get dependencies
+var mongoose = require("mongoose");
 var express = require("express");
 var path = require("path");
 var http = require("http");
@@ -57,6 +58,16 @@ app.use("/documents", documentsRoutes);
 app.get("/*splat", (req, res) => {
   res.sendFile(path.join(__dirname, "./dist/cms/browser/index.html"));
 });
+
+// establish a connection to the mongo database
+mongoose
+  .connect("mongodb://localhost:27017/cms", { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to database!");
+  })
+  .catch((err) => {
+    console.log("Connection failed: " + err);
+  });
 
 // Define the port address and tell express to use this port
 const port = process.env.PORT || "3000";
