@@ -31,7 +31,14 @@ router.post("/", (req, res, next) => {
     .then((createdContact) => {
       res.status(201).json({
         message: "Contact added successfully",
-        contact: createdContact,
+        contact: {
+          id: createdContact.id,
+          name: createdContact.name,
+          email: createdContact.email,
+          phone: createdContact.phone,
+          imageUrl: createdContact.imageUrl,
+          group: req.body.group,
+        },
       });
     })
     .catch((error) => {
