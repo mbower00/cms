@@ -1,0 +1,17 @@
+<!-- using code from https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>{{ contact.name }}</h3>
+    <div class="flex-container">
+      <img [src]="contact.imageUrl" [alt]="contact.name" style="max-height: 90px" />
+      <div class="flex-container right">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div><strong>Email: </strong>{{ contact.email }}</div>
+    <div><strong>Phone: </strong>{{ contact.phone }}</div>
+  </div>
+</div>
