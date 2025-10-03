@@ -8,19 +8,11 @@
         <button class="btn btn-success right">New Contact</button>
       </div>
       <div class="panel-body">
-        <a href="#" class="list-group-item clearfix" *ngFor="let contact of contacts">
-          <div class="pull-left">
-            <h3 class="list-group-item-heading">{{ contact.name }}</h3>
-          </div>
-          <div class="pull-right">
-            <img
-              [src]="contact.imageUrl"
-              alt="{{ contact.name }}"
-              class="img-responsive"
-              style="max-height: 65px"
-            />
-          </div>
-        </a>
+        <cms-contact-item
+          *ngFor="let contact of contacts"
+          [contact]="contact"
+          (click)="onSelected(contact)"
+        ></cms-contact-item>
       </div>
     </div>
   </div>

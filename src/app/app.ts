@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.css',
 })
-export class App {}
+export class App {
+  selectedFeature: string = 'documents';
+
+  switchView(selectedFeature: string) {
+    this.selectedFeature = selectedFeature;
+  }
+}
