@@ -5,14 +5,10 @@
     <div class="panel panel-default">
       <div class="panel-heading flex-container">
         <h2>Contacts</h2>
-        <button class="btn btn-success right">New Contact</button>
+        <button [routerLink]="['new']" class="btn btn-success right">New Contact</button>
       </div>
       <div class="panel-body">
-        <cms-contact-item
-          *ngFor="let contact of contacts"
-          [contact]="contact"
-          (click)="onSelected(contact)"
-        ></cms-contact-item>
+        <cms-contact-item *ngFor="let contact of contacts" [contact]="contact"></cms-contact-item>
       </div>
     </div>
   </div>
