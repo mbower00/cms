@@ -13,5 +13,14 @@
   <div class="panel-body">
     <div><strong>Email: </strong>{{ contact.email }}</div>
     <div><strong>Phone: </strong>{{ contact.phone }}</div>
+    <div *ngIf="contact.group?.length > 0">
+      <strong>Contacts in Team:</strong>
+      <div class="col-sm-12">
+        <cms-contact-item
+          *ngFor="let groupContact of contact.group"
+          [contact]="groupContact"
+        ></cms-contact-item>
+      </div>
+    </div>
   </div>
 </div>
