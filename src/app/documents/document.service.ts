@@ -2,6 +2,7 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,51 @@ export class DocumentService {
   documents: Document[] = [];
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxId();
+  constructor(private http: HttpClient) {
+    this.getDocuments();
   }
 
-  getDocuments(): Document[] {
-    return this.documents.slice();
+  storeDocuments() {
+    const documents = JSON.stringify(this.documents);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const res = this.http.put(
+      'https://mbbcms-5b2ac-default-rtdb.firebaseio.com/documents.json',
+      documents,
+      {
+        headers,
+      }
+    );
+    res.subscribe(
+      // success
+      () => {
+        this.documentListChangedEvent.next(this.documents.slice());
+      },
+      // error
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getDocuments() {
+    const res = this.http.get('https://mbbcms-5b2ac-default-rtdb.firebaseio.com/documents.json');
+    res.subscribe(
+      // success method
+      (documents: Document[]) => {
+        this.documents = documents;
+        this.maxDocumentId = this.getMaxId();
+        this.documents.sort((current, next) => {
+          if (current.name < next.name) return -1;
+          if (current.name > next.name) return 1;
+          return 0;
+        });
+        this.documentListChangedEvent.next(this.documents.slice());
+      },
+      // error method
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getDocument(id: string): Document {
@@ -48,9 +87,8 @@ export class DocumentService {
     this.maxDocumentId++;
     newDocument.id = `${this.maxDocumentId}`;
     this.documents.push(newDocument);
-    const documentsListClone = this.documents.slice();
 
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -70,9 +108,8 @@ export class DocumentService {
 
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
-    const documentsListClone = this.documents.slice();
 
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   deleteDocument(document: Document) {
@@ -86,7 +123,7 @@ export class DocumentService {
     }
 
     this.documents.splice(pos, 1);
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+
+    this.storeDocuments();
   }
 }

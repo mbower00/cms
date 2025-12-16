@@ -31,6 +31,7 @@ export class DocumentDetail implements OnInit {
 
   onView() {
     if (this.document.url) {
+      console.log(this.document.url);
       this.navitveWindow.open(this.document.url);
     }
   }

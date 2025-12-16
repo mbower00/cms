@@ -104,7 +104,6 @@
       <div
         class="alert alert-danger"
         *ngIf="(name.touched && !name.valid) || (email.touched && !email.valid)"
-        (click)="console.log(email.touched)"
       >
         The Name and Email fields are required.
       </div>

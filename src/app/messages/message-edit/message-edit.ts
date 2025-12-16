@@ -9,7 +9,7 @@ import { MessageService } from '../message.service';
   styleUrl: './message-edit.css',
 })
 export class MessageEdit {
-  currentSender: string = 'Mitchell Brandt Bower';
+  currentSender: string = '0';
   @ViewChild('subject') subjectElement: ElementRef;
   @ViewChild('msgText') msgTextElement: ElementRef;
 
