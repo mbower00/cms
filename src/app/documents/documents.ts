@@ -8,4 +8,12 @@ import { DocumentService } from './document.service';
   templateUrl: './documents.html',
   styleUrl: './documents.css',
 })
-export class Documents {}
+export class Documents implements OnInit {
+  loaded = false
+  constructor(private documentService: DocumentService) { }
+  ngOnInit() {
+    this.documentService.isLoaded.subscribe(() => {
+      this.loaded = true
+    })
+  }
+}

@@ -9,11 +9,12 @@ import { MessageService } from '../message.service';
   styleUrl: './message-edit.css',
 })
 export class MessageEdit {
-  currentSender: string = '0';
+  currentSender: string = '101';
+  disabled: string
   @ViewChild('subject') subjectElement: ElementRef;
   @ViewChild('msgText') msgTextElement: ElementRef;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) { }
 
   onSendMessage() {
     const subject = this.subjectElement.nativeElement.value;

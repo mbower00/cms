@@ -1,6 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Message } from './message.model';
-import { MOCKMESSAGES } from './MOCKMESSAGES';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
@@ -16,30 +15,30 @@ export class MessageService {
     this.getMessages();
   }
 
-  storeMessages() {
-    const messages = JSON.stringify(this.messages);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const res = this.http.put(
-      'https://mbbcms-5b2ac-default-rtdb.firebaseio.com/messages.json',
-      messages,
-      {
-        headers,
-      }
-    );
-    res.subscribe(
-      // success
-      () => {
-        this.messageChangedEvent.next(this.messages.slice());
-      },
-      // error
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  // storeMessages() {
+  //   const messages = JSON.stringify(this.messages);
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   const res = this.http.put(
+  //     'https://mbbcms-5b2ac-default-rtdb.firebaseio.com/messages.json',
+  //     messages,
+  //     {
+  //       headers,
+  //     }
+  //   );
+  //   res.subscribe(
+  //     // success
+  //     () => {
+  //       this.messageChangedEvent.next(this.messages.slice());
+  //     },
+  //     // error
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   getMessages() {
-    const res = this.http.get('https://mbbcms-5b2ac-default-rtdb.firebaseio.com/messages.json');
+    const res = this.http.get('http://localhost:3000/messages');
     res.subscribe(
       // success method
       (messages: Message[]) => {
@@ -70,8 +69,30 @@ export class MessageService {
     return maxId;
   }
 
+  // using code from Jeremy Troy Suchanski's comment on W11 Developer Forum
+  sortAndSend() {
+    this.messages.sort((current, next) => {
+      if (current.id < next.id) return -1;
+      if (current.id > next.id) return 1;
+      return 0;
+    });
+    this.messageChangedEvent.next(this.messages.slice());
+  }
+
   addMessage(message: Message) {
-    this.messages.push(message);
-    this.storeMessages();
+    if (!message) {
+      return
+    }
+    // make sure id of the new Message is empty
+    message.id = ''
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    // add to database
+    this.http.post<{ message: string, data: Message }>('http://localhost:3000/messages', message, { headers })
+      .subscribe((responseData) => {
+        // add new message to messages
+        this.messages.push(responseData.data)
+        this.sortAndSend()
+      })
   }
 }

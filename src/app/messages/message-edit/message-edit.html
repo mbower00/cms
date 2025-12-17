@@ -9,12 +9,14 @@
 
         <div class="col-sm-12 form-group">
           <label for="message">Message</label>
-          <input type="text" id="message" class="form-control" max="255" size="120" #msgText />
+          <!-- using code from https://angular.dev/guide/templates/two-way-binding -->
+          <input name="msgText" [(ngModel)]="disabled" type="text" id="message" class="form-control" max="255"
+            size="120" #msgText />
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 flex-container">
-          <button class="btn btn-success" type="submit" (click)="onSendMessage()">Send</button>
+          <button [disabled]="!disabled" class="btn btn-success" type="submit" (click)="onSendMessage()">Send</button>
           <button class="btn btn-danger" type="button" (click)="onClear()">Clear</button>
         </div>
       </div>

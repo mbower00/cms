@@ -10,8 +10,13 @@ import { ContactService } from './contact.service';
 })
 export class Contacts implements OnInit {
   selectedContact: Contact;
+  loaded = false
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.contactService.isLoaded.subscribe(() => {
+      this.loaded = true
+    })
+  }
 }

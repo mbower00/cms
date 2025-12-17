@@ -3,7 +3,7 @@
     <cms-document-list></cms-document-list>
   </div>
 
-  <div class="col-md-4">
+  <div *ngIf="loaded" class="col-md-4">
     <router-outlet></router-outlet>
   </div>
 </div>
