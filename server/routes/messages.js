@@ -28,8 +28,7 @@ router.post('/', async (req, res, next) => {
     let sender = null
     if (req.body.sender) {
         try {
-            const contact = await Contact.findOne({ id: req.body.sender })
-            sender = contact
+            sender = await Contact.findOne({ id: req.body.sender })
         } catch (error) {
             res.status(500).json({ message: 'Could not find sender', error })
         }

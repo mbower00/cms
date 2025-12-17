@@ -13,6 +13,8 @@ import { ContactService } from '../../contacts/contact.service';
 export class MessageList implements OnInit, OnDestroy {
   messages: Message[] = [];
   subscription: Subscription;
+  loadSubscription: Subscription
+  loaded = false
 
   constructor(private messageService: MessageService, private contactService: ContactService) { }
 
@@ -24,12 +26,13 @@ export class MessageList implements OnInit, OnDestroy {
     this.subscription = this.messageService.messageChangedEvent.subscribe((messages: Message[]) => {
       this.messages = messages;
     });
-    this.contactService.isLoaded.subscribe(() => {
-      this.messageService.getMessages();
+    this.loadSubscription = this.contactService.isLoaded.subscribe(() => {
+      this.messageService.getMessages()
     })
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.loadSubscription.unsubscribe();
   }
 }

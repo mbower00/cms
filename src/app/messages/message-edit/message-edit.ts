@@ -9,7 +9,7 @@ import { MessageService } from '../message.service';
   styleUrl: './message-edit.css',
 })
 export class MessageEdit {
-  currentSender: string = '101';
+  currentSender: string = '153';
   disabled: string
   @ViewChild('subject') subjectElement: ElementRef;
   @ViewChild('msgText') msgTextElement: ElementRef;
