@@ -21,12 +21,14 @@ export class MessageEdit {
     const msgText = this.msgTextElement.nativeElement.value;
     this.subjectElement.nativeElement.value = '';
     this.msgTextElement.nativeElement.value = '';
+    this.disabled = ''
     const message = new Message('0', subject, msgText, this.currentSender);
     this.messageService.addMessage(message);
   }
   onClear() {
     this.subjectElement.nativeElement.value = '';
     this.msgTextElement.nativeElement.value = '';
+    this.disabled = ''
   }
   onFormSubmit(event: SubmitEvent) {
     event.preventDefault();
